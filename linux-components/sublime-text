@@ -1,0 +1,4 @@
+fancy_echo "Installing sublime-text ..."
+  wget -O /tmp/sublime-text_build-3062_amd64.deb http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3062_amd64.deb
+  sudo dpkg -i /tmp/sublime-text_build-3062_amd64.deb
+  rm -f /tmp/sublime-text_build-3062_amd64.deb
