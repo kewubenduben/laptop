@@ -190,6 +190,51 @@ fancy_echo "Installing rcm, to manage your dotfiles ..."
   rm -f /tmp/rcm_1.2.3-1_all.deb
 ### end linux-components/rcm
 
+fancy_echo "Installing Canonical Partner stuffs ..."
+  sudo echo 'deb http://archive.canonical.com/ubuntu trusty partner' > /etc/apt/sources.list.d/canonical-partners.list
+  sudo echo 'deb-src http://archive.canonical.com/ubuntu trusty partner' >> /etc/apt/sources.list.d/canonical-partners.list
+  sudo aptitude update
+  sudo aptitude install -y ubuntu-restricted-extras
+  sudo aptitude install -y flashplugin-installer
+  sudo aptitude install -y nautilus-dropbox
+  sudo aptitude install -y vlc
+  sudo aptitude install -y rar
+  sudo aptitude install -y unity-tweak-tool
+  sudo aptitude install -y icedtea-7-plugin openjdk-7-jre
+  sudo aptitude install -y pepperflashplugin-nonfree
+  sudo update-pepperflashplugin-nonfree --install
+### end linux-components/canonical-partners
+
+fancy_echo "Installing sublime-text ..."
+  wget -O /tmp/sublime-text_build-3062_amd64.deb http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3062_amd64.deb
+  sudo dpkg -i /tmp/sublime-text_build-3062_amd64.deb
+  rm -f /tmp/sublime-text_build-3062_amd64.deb
+### end linux-components/sublime-text
+
+fancy_echo "Installing vagrant ..."
+  wget -O /tmp/vagrant_1.6.2_x86_64.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.2_x86_64.deb
+  sudo dpkg -i /tmp/vagrant_1.6.2_x86_64.deb
+  rm -f /tmp/vagrant_1.6.2_x86_64.deb
+### end linux-components/vagrant
+
+fancy_echo "Installing virtualbox ..."
+  sudo echo 'deb http://download.virtualbox.org/virtualbox/debian trusty contrib' > /etc/apt/sources.list.d/virtualbox.list
+  wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
+  sudo aptitude update
+  sudo aptitude install -y virtualbox-4.3
+### end linux-components/virtualbox
+
+fancy_echo "Installing Chef developer kit ..."
+  wget -O /tmp/chefdk_0.1.0-1_amd64.deb https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/13.10/x86_64/chefdk_0.1.0-1_amd64.deb
+  sudo dpkg -i /tmp/chefdk_0.1.0-1_amd64.deb
+  rm -f /tmp/chefdk_0.1.0-1_amd64.deb
+### end linux-components/chef-dk
+
+fancy_echo "Installing vim Vundle ..."
+  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
+  vim +PluginInstall +qall
+### end common-components/vim-vundle
+
 fancy_echo "Installing your personal additions from ~/.laptop.local ..."
   if [[ -f ~/.laptop.local ]]; then
     source ~/.laptop.local
