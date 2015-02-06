@@ -43,7 +43,7 @@ Read, then run the script:
 
 Read, then run the script:
 
-    bash <(wget -qO- https://raw.githubusercontent.com/thoughtbot/laptop/master/linux)
+    bash <(wget -qO- https://raw.githubusercontent.com/kewubenduben/laptop/master/linux)
 
 What it sets up
 ---------------
