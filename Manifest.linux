@@ -19,7 +19,7 @@ linux-components/canonical-partners
 linux-components/sublime-text
 linux-components/vagrant
 linux-components/virtualbox
-linux-components/chef-dk
+linux-components/docker
 common-components/vim-vundle
 common-components/personal-additions
 common-components/oh-my-zsh

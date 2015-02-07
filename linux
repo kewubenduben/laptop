@@ -190,6 +190,19 @@ fancy_echo "Installing rcm, to manage your dotfiles ..."
   rm -f /tmp/rcm_1.2.3-1_all.deb
 ### end linux-components/rcm
 
+fancy_echo "Installing Canonical Partner stuffs ..."
+  sudo bash -c "echo 'deb http://archive.canonical.com/ubuntu trusty partner' > /etc/apt/sources.list.d/canonical-partners.list"
+  sudo bash -c "echo 'deb-src http://archive.canonical.com/ubuntu trusty partner' >> /etc/apt/sources.list.d/canonical-partners.list"
+  sudo aptitude update
+  sudo aptitude install -y ubuntu-restricted-extras
+  sudo aptitude install -y flashplugin-installer
+  sudo aptitude install -y nautilus-dropbox
+  sudo aptitude install -y vlc
+  sudo aptitude install -y rar
+  sudo aptitude install -y unity-tweak-tool
+  sudo aptitude install -y icedtea-7-plugin openjdk-7-jre
+  sudo aptitude install -y pepperflashplugin-nonfree
+  sudo update-pepperflashplugin-nonfree --install
 ### end linux-components/canonical-partners
 
 fancy_echo "Installing sublime-text ..."
@@ -211,7 +224,9 @@ fancy_echo "Installing virtualbox ..."
   sudo aptitude install -y virtualbox-4.3
 ### end linux-components/virtualbox
 
-### end linux-components/chef-dk
+fancy_echo "Installing docker ..."
+  curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+### end linux-components/docker
 
 fancy_echo "Installing vim Vundle ..."
   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
