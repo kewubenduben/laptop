@@ -51,6 +51,8 @@ fancy_echo "Updating system packages ..."
 ### end linux-components/debian-package-update
 
 fancy_echo "Installing git, for source control management ..."
+  sudo add-apt-repository ppa:git-core/ppa
+  sudo apt-get update
   sudo aptitude install -y git
 
 fancy_echo "Installing base ruby build dependencies ..."
@@ -239,7 +241,7 @@ fancy_echo "Installing your personal additions from ~/.laptop.local ..."
   fi
 ### end common-components/personal-additions
 
-fancy_echo "oh-my-zsh ..."
+fancy_echo "Installing oh-my-zsh ..."
   wget --no-check-certificate http://install.ohmyz.sh -O - | sh
 ### end common-components/oh-my-zsh
 

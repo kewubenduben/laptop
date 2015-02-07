@@ -1,4 +1,6 @@
 fancy_echo "Installing git, for source control management ..."
+  sudo add-apt-repository ppa:git-core/ppa
+  sudo apt-get update
   sudo aptitude install -y git
 
 fancy_echo "Installing base ruby build dependencies ..."
