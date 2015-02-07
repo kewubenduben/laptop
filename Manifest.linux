@@ -22,3 +22,4 @@ linux-components/virtualbox
 linux-components/chef-dk
 common-components/vim-vundle
 common-components/personal-additions
+common-components/oh-my-zsh
