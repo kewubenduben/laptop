@@ -190,31 +190,18 @@ fancy_echo "Installing rcm, to manage your dotfiles ..."
   rm -f /tmp/rcm_1.2.3-1_all.deb
 ### end linux-components/rcm
 
-fancy_echo "Installing Canonical Partner stuffs ..."
-  sudo bash -c "echo 'deb http://archive.canonical.com/ubuntu trusty partner' > /etc/apt/sources.list.d/canonical-partners.list"
-  sudo bash -c "echo 'deb-src http://archive.canonical.com/ubuntu trusty partner' >> /etc/apt/sources.list.d/canonical-partners.list"
-  sudo aptitude update
-  sudo aptitude install -y ubuntu-restricted-extras
-  sudo aptitude install -y flashplugin-installer
-  sudo aptitude install -y nautilus-dropbox
-  sudo aptitude install -y vlc
-  sudo aptitude install -y rar
-  sudo aptitude install -y unity-tweak-tool
-  sudo aptitude install -y icedtea-7-plugin openjdk-7-jre
-  sudo aptitude install -y pepperflashplugin-nonfree
-  sudo update-pepperflashplugin-nonfree --install
 ### end linux-components/canonical-partners
 
 fancy_echo "Installing sublime-text ..."
-  wget -O /tmp/sublime-text_build-3062_amd64.deb http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3062_amd64.deb
-  sudo dpkg -i /tmp/sublime-text_build-3062_amd64.deb
-  rm -f /tmp/sublime-text_build-3062_amd64.deb
+  wget -O /tmp/sublime-text_build-3065_amd64.deb http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3065_amd64.deb
+  sudo dpkg -i /tmp/sublime-text_build-3065_amd64.deb
+  rm -f /tmp/sublime-text_build-3065_amd64.deb
 ### end linux-components/sublime-text
 
 fancy_echo "Installing vagrant ..."
-  wget -O /tmp/vagrant_1.6.2_x86_64.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.2_x86_64.deb
-  sudo dpkg -i /tmp/vagrant_1.6.2_x86_64.deb
-  rm -f /tmp/vagrant_1.6.2_x86_64.deb
+  wget -O /tmp/vagrant_1.7.2_x86_64.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb
+  sudo dpkg -i /tmp/vagrant_1.7.2_x86_64.deb
+  rm -f /tmp/vagrant_1.7.2_x86_64.deb
 ### end linux-components/vagrant
 
 fancy_echo "Installing virtualbox ..."
@@ -224,10 +211,6 @@ fancy_echo "Installing virtualbox ..."
   sudo aptitude install -y virtualbox-4.3
 ### end linux-components/virtualbox
 
-fancy_echo "Installing Chef developer kit ..."
-  wget -O /tmp/chefdk_0.1.0-1_amd64.deb https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/13.10/x86_64/chefdk_0.1.0-1_amd64.deb
-  sudo dpkg -i /tmp/chefdk_0.1.0-1_amd64.deb
-  rm -f /tmp/chefdk_0.1.0-1_amd64.deb
 ### end linux-components/chef-dk
 
 fancy_echo "Installing vim Vundle ..."
@@ -240,4 +223,8 @@ fancy_echo "Installing your personal additions from ~/.laptop.local ..."
     source ~/.laptop.local
   fi
 ### end common-components/personal-additions
+
+fancy_echo "oh-my-zsh ..."
+  wget --no-check-certificate http://install.ohmyz.sh -O - | sh
+### end common-components/oh-my-zsh
 
