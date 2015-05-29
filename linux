@@ -30,9 +30,28 @@ fi
 fancy_echo() {
   printf "\n%b\n" "$1"
 }
+
+append_to_zshrc() {
+  local text="$1" zshrc
+  local skip_new_line="${2:-0}"
+
+  if [ -w "$HOME/.zshrc.local" ]; then
+    zshrc="$HOME/.zshrc.local"
+  else
+    zshrc="$HOME/.zshrc"
+  fi
+
+  if ! grep -Fqs "$text" "$zshrc"; then
+    if [ "$skip_new_line" -eq 1 ]; then
+      printf "%s\n" "$text" >> "$zshrc"
+    else
+      printf "\n%s\n" "$text" >> "$zshrc"
+    fi
+  fi
+}
 ### end common-components/shared-functions
 
-if ! grep -qiE 'wheezy|jessie|precise|saucy|trusty' /etc/os-release; then
+if ! grep -qiE 'wheezy|jessie|precise|saucy|trusty|vivid' /etc/os-release; then
   fancy_echo "Sorry! we don't currently support that distro."
   exit 1
 fi
@@ -93,10 +112,18 @@ fancy_echo "Installing zsh ..."
 
 fancy_echo "Installing node, to render the rails asset pipeline ..."
   sudo aptitude install -y nodejs
+
+fancy_echo "installing fonts ..."
+  sudo apt-get install ubuntu-keyboard-emoji ttf-ancient-fonts-symbola powerline
 ### end linux-components/debian-derivative-packages
 
-fancy_echo "Changing your shell to zsh ..."
-  chsh -s $(which zsh)
+case "$SHELL" in
+  */zsh) : ;;
+  *)
+    fancy_echo "Changing your shell to zsh ..."
+      chsh -s "$(which zsh)"
+    ;;
+esac
 ### end common-components/zsh
 
 silver_searcher_from_source() {
@@ -192,25 +219,12 @@ fancy_echo "Installing rcm, to manage your dotfiles ..."
   rm -f /tmp/rcm_1.2.3-1_all.deb
 ### end linux-components/rcm
 
-fancy_echo "Installing Canonical Partner stuffs ..."
-  sudo bash -c "echo 'deb http://archive.canonical.com/ubuntu trusty partner' > /etc/apt/sources.list.d/canonical-partners.list"
-  sudo bash -c "echo 'deb-src http://archive.canonical.com/ubuntu trusty partner' >> /etc/apt/sources.list.d/canonical-partners.list"
-  sudo aptitude update
-  sudo aptitude install -y ubuntu-restricted-extras
-  sudo aptitude install -y flashplugin-installer
-  sudo aptitude install -y nautilus-dropbox
-  sudo aptitude install -y vlc
-  sudo aptitude install -y rar
-  sudo aptitude install -y unity-tweak-tool
-  sudo aptitude install -y icedtea-7-plugin openjdk-7-jre
-  sudo aptitude install -y pepperflashplugin-nonfree
-  sudo update-pepperflashplugin-nonfree --install
 ### end linux-components/canonical-partners
 
 fancy_echo "Installing sublime-text ..."
-  wget -O /tmp/sublime-text_build-3065_amd64.deb http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3065_amd64.deb
-  sudo dpkg -i /tmp/sublime-text_build-3065_amd64.deb
-  rm -f /tmp/sublime-text_build-3065_amd64.deb
+  wget -O /tmp/sublime-text_build-3083_amd64.deb http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
+  sudo dpkg -i /tmp/sublime-text_build-3083_amd64.deb
+  rm -f /tmp/sublime-text_build-3083_amd64.deb
 ### end linux-components/sublime-text
 
 fancy_echo "Installing vagrant ..."
@@ -226,9 +240,26 @@ fancy_echo "Installing virtualbox ..."
   sudo aptitude install -y virtualbox-4.3
 ### end linux-components/virtualbox
 
-fancy_echo "Installing docker ..."
-  curl -sSL https://get.docker.com/ubuntu/ | sudo sh
 ### end linux-components/docker
+
+fancy_echo "installing pyenv ..."
+  curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+### end linux-components/pyenv
+
+fancy_echo "installing gvm ..."
+  bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+### end linux-components/gvm
+
+fancy_echo "installing nvm ..."
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.3/install.sh | bash
+### end linux-components/nvm
+
+fancy_echo "Installing Google Chrome ..."
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+  sudo apt-get update
+  sudo apt-get install google-chrome-stable
+### end linux-components/chrome
 
 fancy_echo "Installing vim Vundle ..."
   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
