@@ -44,3 +44,7 @@ fancy_echo "Installing node, to render the rails asset pipeline ..."
 
 fancy_echo "installing fonts ..."
   sudo apt-get install -y ubuntu-keyboard-emoji ttf-ancient-fonts-symbola powerline
+
+fancy_echo "installing htop ..."
+  sudo apt-get install -y htop
+
