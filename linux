@@ -70,7 +70,7 @@ fancy_echo "Updating system packages ..."
 ### end linux-components/debian-package-update
 
 fancy_echo "Installing git, for source control management ..."
-  sudo add-apt-repository ppa:git-core/ppa
+  sudo add-apt-repository -y ppa:git-core/ppa
   sudo apt-get update
   sudo aptitude install -y git
 
@@ -114,7 +114,7 @@ fancy_echo "Installing node, to render the rails asset pipeline ..."
   sudo aptitude install -y nodejs
 
 fancy_echo "installing fonts ..."
-  sudo apt-get install ubuntu-keyboard-emoji ttf-ancient-fonts-symbola powerline
+  sudo apt-get install -y ubuntu-keyboard-emoji ttf-ancient-fonts-symbola powerline
 ### end linux-components/debian-derivative-packages
 
 case "$SHELL" in
@@ -253,13 +253,6 @@ fancy_echo "installing gvm ..."
 fancy_echo "installing nvm ..."
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.3/install.sh | bash
 ### end linux-components/nvm
-
-fancy_echo "Installing Google Chrome ..."
-  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-  sudo apt-get update
-  sudo apt-get install google-chrome-stable
-### end linux-components/chrome
 
 fancy_echo "Installing vim Vundle ..."
   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle

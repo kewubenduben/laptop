@@ -23,7 +23,6 @@ linux-components/docker
 linux-components/pyenv
 linux-components/gvm
 linux-components/nvm
-linux-components/chrome
 common-components/vim-vundle
 common-components/personal-additions
 common-components/oh-my-zsh
